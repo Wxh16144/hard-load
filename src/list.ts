@@ -27,7 +27,7 @@ export default [
   ),
 
   // dumi
-  winPath(CWD, '.dumi', '**'),
+  winPath(CWD, '.dumi/tmp', '**'),
 
   // test coverage
   winPath(CWD, '.coverage', '**'),
