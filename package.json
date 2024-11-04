@@ -1,25 +1,25 @@
 {
-  "name": "@template-pro/start-cli",
+  "name": "hard-load",
   "version": "0.0.0",
   "private": true,
   "description": "",
-  "homepage": "https://github.com/template-pro/start-cli",
+  "homepage": "https://github.com/Wxh16144/hard-load",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/template-pro/start-cli.git"
+    "url": "git+https://github.com/Wxh16144/hard-load.git"
   },
   "license": "MIT",
   "author": "Wuxh <wxh16144@qq.com>",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "template-start-cli": "index.js"
+    "hard-load": "index.js"
   },
   "files": [
     "index.js",
     "dist"
   ],
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@8.15.9",
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
@@ -27,13 +27,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "del": "^8.0.0",
     "kleur": "^4.1.5",
     "mri": "^1.2.0",
     "terminal-link": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.19.31",
-    "typescript": "^5.4.5",
+    "@types/node": "^18.19.64",
+    "typescript": "^5.6.3",
     "unbuild": "^1.2.1"
   },
   "engines": {
