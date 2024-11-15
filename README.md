@@ -22,3 +22,15 @@ pnpm add hard-load
   }
 }
 ```
+
+or
+
+> 运行 `hard-load` 后，指定 `dev` 命令执行。
+
+```diff
+{
+  "scripts": {
+    "dev": "vite",
++   "start": "npx hard-load dev",
+  }
+}
