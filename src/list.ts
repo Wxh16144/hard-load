@@ -27,17 +27,14 @@ export default [
   ),
 
   // dumi
-  winPath(CWD, '.dumi/tmp-*',),
+  winPath(CWD, '.dumi/tmp-*'),
+
+  // nextjs
+  winPath(CWD, '.next'),
 
   // test coverage
   winPath(CWD, '.coverage', '**'),
 
   // compile output
-  ...(
-    ENABLED_OUTPUT
-      ? [
-        winPath(CWD, '{es,lib,dist}', '**'),
-      ]
-      : []
-  )
-]
+  ENABLED_OUTPUT && winPath(CWD, '{es,lib,dist}', '**')
+].filter(Boolean) as string[];

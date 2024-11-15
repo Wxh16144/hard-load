@@ -2,10 +2,11 @@
 
 exports[`list > matches the snapshot 1`] = `
 [
+  ".coverage/**",
+  ".dumi/tmp-*",
+  ".next",
+  ".umi/**",
   "node_modules/.cache",
   "node_modules/.vite",
-  ".umi/**",
-  ".dumi/tmp-*",
-  ".coverage/**",
 ]
 `;
