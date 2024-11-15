@@ -4,6 +4,8 @@ import path from "path";
 import c from "kleur";
 import mri from "mri";
 import terminalLink from 'terminal-link';
+import { detectSync, resolveCommand } from 'package-manager-detector'
+import { execaSync } from 'execa'
 import { deleteAsync } from 'del';
 import list from "./list";
 import { Argv } from "./type";
@@ -35,7 +37,7 @@ async function main(args: Argv = argv) {
 
   if (args.help) {
     console.log(`
-    npx ${c.bold(command)} [options]
+    npx ${c.bold(command)} [npm script name]/[options]
     ----------------------------------------
     -${c.bold('h')}, --help: show help.
     -${c.bold('l')}, --list: show files to be deleted.
@@ -63,6 +65,19 @@ async function main(args: Argv = argv) {
         terminalLink(`[${String(pkg.name).toUpperCase()}]`, pkg.homepage)
       )
     )}: Hard disk cleaned! 🎉`);
+  }
+
+  // hasScript 
+  if (args._.length > 0) {
+    const pm = detectSync();
+    if (pm === null) return;
+
+    const { command, args: realArgs } = resolveCommand(pm.agent, 'run', args._)!;
+    execaSync(command, realArgs, {
+      // https://github.com/sindresorhus/execa/blob/main/docs/api.md#options-1
+      stdio: 'inherit',
+      cwd: process.cwd(),
+    });
   }
 }
 
