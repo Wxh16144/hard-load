@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`list > matches the snapshot 1`] = `
+[
+  "node_modules/.cache",
+  "node_modules/.vite",
+  ".umi/**",
+  ".dumi/tmp/**",
+  ".coverage/**",
+]
+`;
