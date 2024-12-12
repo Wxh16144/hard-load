@@ -6,7 +6,7 @@ import mri from "mri";
 import terminalLink from 'terminal-link';
 import { detectSync, resolveCommand } from 'package-manager-detector'
 import { execaSync } from 'execa'
-import { deleteAsync } from 'del';
+import { deleteSync } from 'del';
 import list from "./list";
 import { Argv } from "./type";
 
@@ -21,9 +21,11 @@ const argv = mri<Argv>(process.argv.slice(2), {
 });
 
 async function main(args: Argv = argv) {
-  const dryRun = args._.includes('--dry-run')
+  const dryRun = !!(
+    args.dryRun /** --dry-run */
     ?? process.env.DRY_RUN
     ?? process.env.DEBUG === pkg.name
+  )
 
   if (args.version) {
     console.log(`${c.bold(pkg.name)}: ${c.green('v' + pkg.version)}`);
@@ -49,22 +51,29 @@ async function main(args: Argv = argv) {
     return;
   }
 
-  deleteAsync(
-    list,
-    // https://github.com/sindresorhus/del?tab=readme-ov-file#options
-    {
-      force: true,
-      dot: true,
-      dryRun,
-    }
-  )
+  const consuming = (function () {
+    const start = process.hrtime.bigint();
+    deleteSync(
+      list,
+      // https://github.com/sindresorhus/del?tab=readme-ov-file#options
+      {
+        force: true,
+        dot: true,
+        dryRun,
+      }
+    )
+    const end = process.hrtime.bigint();
+
+    return Number(end - start) / 1e6;
+  }());
 
   if (!dryRun) {
     console.log(`${c.green(
       c.bold(
         terminalLink(`[${String(pkg.name).toUpperCase()}]`, pkg.homepage)
       )
-    )}: Hard disk cleaned! 🎉`);
+    )}: Hard disk cleaned! 🎉 ${c.gray(`(${consuming}ms)`)}`
+    );
   }
 
   // hasScript 

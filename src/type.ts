@@ -4,5 +4,6 @@ export interface Argv {
   help?: boolean;
   list?: boolean;
   version?: boolean;
+  dryRun?: boolean;
   _: string[];
 }
