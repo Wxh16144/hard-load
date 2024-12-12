@@ -17,7 +17,7 @@ export default [
   winPath(NODE_MODULES, '.cache'),
 
   // vite
-  winPath(NODE_MODULES, '.vite'),
+  winPath(NODE_MODULES, '{.vite,.vite-*}'),
 
   // umi
   winPath(
@@ -27,7 +27,7 @@ export default [
   ),
 
   // dumi
-  winPath(CWD, '.dumi/tmp-*'),
+  winPath(CWD, '.dumi/{tmp,tmp-*}'),
 
   // nextjs
   winPath(CWD, '.next'),
